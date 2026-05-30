@@ -8,65 +8,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@RestController              // Tells Spring: this class handles HTTP requests
-@RequestMapping("/students") // All APIs will start with /students
+@RestController
+@RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
     // 1. GET all students
-    // URL: GET http://localhost:8080/students
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {
-        List<Student> students = studentService.getAllStudents();
-        return ResponseEntity.ok(students);
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 
     // 2. GET student by ID
-    // URL: GET http://localhost:8080/students/1
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-        Optional<Student> student = studentService.getStudentById(id);
-        if (student.isPresent()) {
-            return ResponseEntity.ok(student.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     // 3. POST - Add new student
-    // URL: POST http://localhost:8080/students
     @PostMapping
     public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        Student saved = studentService.addStudent(student);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(student));
     }
 
     // 4. PUT - Update student
-    // URL: PUT http://localhost:8080/students/1
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id,
                                                   @RequestBody Student student) {
-        try {
-            Student updated = studentService.updateStudent(id, student);
-            return ResponseEntity.ok(updated);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 
     // 5. DELETE - Delete student
-    // URL: DELETE http://localhost:8080/students/1
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
-        try {
-            studentService.deleteStudent(id);
-            return ResponseEntity.ok("Student deleted successfully!");
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully!");
     }
 }

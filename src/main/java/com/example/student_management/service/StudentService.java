@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.student_management.exception.StudentNotFoundException;
 import com.example.student_management.model.Student;
 import com.example.student_management.repository.StudentRepository;
 
@@ -20,9 +21,9 @@ public class StudentService {
 		return studentRepository.findAll();
 	}
 	
-	public Optional<Student> getStudentById(Long id)
-	{
-		return studentRepository.findById(id);
+	public Student getStudentById(Long id) {
+	    return studentRepository.findById(id)
+	            .orElseThrow(() -> new StudentNotFoundException(id));
 	}
 	
 	public Student addStudent(Student student)
@@ -32,7 +33,8 @@ public class StudentService {
 	
 	public Student updateStudent(Long id, Student updatedStudent)
 	{
-		Student existing = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id:"+ id));
+		Student existing = studentRepository.findById(id)
+		        .orElseThrow(() -> new StudentNotFoundException(id));
 		
 		existing.setName(updatedStudent.getName());
 		existing.setEmail(updatedStudent.getEmail());
@@ -45,11 +47,9 @@ public class StudentService {
 	
 	public void deleteStudent(Long id)
 	{
-		if(!studentRepository.existsById(id))
-		{
-			throw new RuntimeException("Student not found with id:" +id);
+		if (!studentRepository.existsById(id)) {
+		    throw new StudentNotFoundException(id);
 		}
-		
 		studentRepository.deleteById(id);
 	}
 
