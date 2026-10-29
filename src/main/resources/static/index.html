@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Student Management System</h1>
+        <p>Manage your student records</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2 id="formTitle">Add New Student</h2>
+
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="Enter full name" required>
+
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Enter email" required>
+
+                <label for="phone">Phone</label>
+                <input id="phone" type="tel" placeholder="Enter phone number" required>
+
+                <label for="course">Course</label>
+                <input id="course" type="text" placeholder="Enter course" required>
+
+                <button type="submit" id="saveButton">Add Student</button>
+                <button type="button" id="cancelButton" hidden>Cancel Edit</button>
+            </form>
+
+            <p id="message" role="status"></p>
+        </section>
+
+        <section class="card">
+            <h2>Student Records</h2>
+
+            <button type="button" id="refreshButton">
+                Refresh Records
+            </button>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTable">
+                        <tr>
+                            <td colspan="6">Loading students...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #243047;
+}
+
+header {
+    background: #173b70;
+    color: white;
+    padding: 24px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px;
+}
+
+header p {
+    margin: 0;
+}
+
+main {
+    width: 92%;
+    max-width: 1200px;
+    margin: 28px auto;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+h2 {
+    margin-top: 0;
+    color: #173b70;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+    align-self: end;
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #2463a6;
+    color: white;
+    cursor: pointer;
+    margin: 4px;
+}
+
+button:hover {
+    background: #173b70;
+}
+
+#cancelButton {
+    background: #64748b;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background: #eaf0f8;
+}
+
+#message {
+    font-weight: bold;
+}
+
+@media (max-width: 650px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+}
